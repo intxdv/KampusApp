@@ -71,10 +71,6 @@ export default function LoginScreen({ navigation }) {
                 {loading ? 'Memproses...' : 'Masuk'}
               </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity style={styles.forgotPassword}>
-              <Text style={styles.forgotPasswordText}>Lupa Password?</Text>
-            </TouchableOpacity>
           </View>
 
           {/* Register Link */}

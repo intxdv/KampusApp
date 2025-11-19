@@ -1,18 +1,20 @@
 import { MMKV } from 'react-native-mmkv';
 
-let storage = null;
+const initializeStorage = () => {
+  try {
+    return new MMKV();
+  } catch (error) {
+    console.warn('MMKV initialization failed:', error);
+    // Fallback to a simple object-based storage
+    return {
+      set: () => {},
+      getString: () => null,
+      delete: () => {},
+    };
+  }
+};
 
-try {
-  storage = new MMKV();
-} catch (error) {
-  console.warn('MMKV initialization failed:', error);
-  // Fallback to a simple object-based storage
-  storage = {
-    set: () => {},
-    getString: () => null,
-    delete: () => {},
-  };
-}
+const storage = initializeStorage();
 
 export const setSession = (user) => {
   if (storage && storage.set) {

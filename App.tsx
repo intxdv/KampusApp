@@ -1,3 +1,8 @@
+/************************************/
+/* Pembuat		: Syafiq Abiyyu Taqi / 24060123120012 / PBP-E */
+/* Tanggal		: 19 November 2025 */
+/***********************************/
+
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
