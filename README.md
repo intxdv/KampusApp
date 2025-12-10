@@ -1,97 +1,86 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# KampusApp
 
-# Getting Started
+Aplikasi mobile sederhana untuk mahasiswa yang dibangun menggunakan **React Native** dan **Firebase**. Aplikasi ini memiliki fitur autentikasi (Login & Register) dan halaman utama.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Fitur
 
-## Step 1: Start Metro
+- **Autentikasi**: Login dan Register menggunakan Email & Password.
+- **Database**: Menyimpan data mahasiswa di Cloud Firestore.
+- **Navigasi**: Menggunakan React Navigation untuk perpindahan antar layar.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Prasyarat
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Sebelum menjalankan aplikasi, pastikan Anda telah menginstal:
 
-```sh
-# Using npm
-npm start
+- Node.js
+- React Native CLI
+- Android Studio (untuk Android)
+- Xcode (untuk iOS, hanya macOS)
+- Java Development Kit (JDK)
 
-# OR using Yarn
-yarn start
-```
+## Konfigurasi Firebase (PENTING)
 
-## Step 2: Build and run your app
+Project ini menggunakan Firebase untuk backend. Karena file konfigurasi Firebase bersifat rahasia, file tersebut **tidak disertakan** dalam repository ini. Anda perlu membuat project Firebase Anda sendiri.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### 1. Buat Project Firebase
+1. Buka [Firebase Console](https://console.firebase.google.com/).
+2. Buat project baru.
 
-### Android
+### 2. Aktifkan Layanan
+1. Masuk ke menu **Authentication** -> **Sign-in method** -> Aktifkan **Email/Password**.
+2. Masuk ke menu **Firestore Database** -> **Create Database**.
 
-```sh
-# Using npm
-npm run android
+### 3. Konfigurasi Android
+1. Di dashboard Firebase, klik ikon **Android** untuk menambahkan aplikasi Android.
+2. Masukkan package name: `com.kampusapp` (sesuaikan dengan `android/app/build.gradle` jika Anda mengubahnya).
+3. Download file `google-services.json`.
+4. Letakkan file tersebut di folder:
+   ```
+   android/app/google-services.json
+   ```
 
-# OR using Yarn
-yarn android
-```
+### 4. Konfigurasi iOS (Opsional)
+1. Di dashboard Firebase, klik ikon **iOS** untuk menambahkan aplikasi iOS.
+2. Masukkan Bundle ID.
+3. Download file `GoogleService-Info.plist`.
+4. Buka project `ios/KampusApp.xcodeproj` di Xcode.
+5. Klik kanan pada folder `KampusApp` di sidebar kiri -> **Add Files to "KampusApp"**.
+6. Pilih file `GoogleService-Info.plist` yang sudah didownload.
 
-### iOS
+## Cara Menjalankan
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+1. **Install Dependencies**
+   ```bash
+   npm install
+   # atau
+   yarn install
+   ```
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+2. **Jalankan Metro Server**
+   ```bash
+   npm start
+   ```
 
-```sh
-bundle install
-```
+3. **Jalankan di Android**
+   ```bash
+   npm run android
+   ```
 
-Then, and every time you update your native dependencies, run:
+4. **Jalankan di iOS** (macOS only)
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   npm run ios
+   ```
 
-```sh
-bundle exec pod install
-```
+## Struktur Folder
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+- `screens/`: Berisi halaman-halaman aplikasi (Login, Register, Home).
+- `utils/`: Berisi fungsi utilitas (seperti penyimpanan sesi).
+- `android/`: Native code untuk Android.
+- `ios/`: Native code untuk iOS.
 
-```sh
-# Using npm
-npm run ios
+## Catatan Keamanan
 
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+File `google-services.json` dan `GoogleService-Info.plist` telah ditambahkan ke `.gitignore` untuk mencegah kebocoran kredensial. Jangan pernah meng-commit file-file ini ke repository publik.
